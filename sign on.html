@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to My Soko</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('sokop/lol.jpg'); /* Ensure correct path */
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .container {
+            background: #fff;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            width: 350px;
+            text-align: center;
+            background-color: darkseagreen;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            text-align: left;
+        }
+        input, select {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            display: block;
+        }
+        .btn {
+            background-color: darksalmon; 
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+            width: 100%;
+            font-weight: bold;
+        }
+        .btn:hover {
+            background-color: #d46a5d;
+            transform: scale(1.05);
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Register to MY SOKO</h2>
+        <form id="registerForm" method="POST" action="register.php">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="nida">NIDA No:</label>
+            <input type="number" id="nida" name="nida_no" required>
+
+            <label for="region">Region:</label>
+            <select id="region" name="region" required>
+                <option value="">Select a region</option>
+                <option value="Arusha">Arusha</option>
+                <option value="Dar es Salaam">Dar es Salaam</option>
+                <option value="Dodoma">Dodoma</option>
+                <option value="Geita">Geita</option>
+                <option value="Iringa">Iringa</option>
+                <option value="Kagera">Kagera</option>
+                <option value="Katavi">Katavi</option>
+                <option value="Kigoma">Kigoma</option>
+                <option value="Kilimanjaro">Kilimanjaro</option>
+                <option value="Lindi">Lindi</option>
+                <option value="Manyara">Manyara</option>
+                <option value="Mara">Mara</option>
+                <option value="Mbeya">Mbeya</option>
+                <option value="Morogoro">Morogoro</option>
+                <option value="Mtwara">Mtwara</option>
+                <option value="Mwanza">Mwanza</option>
+                <option value="Njombe">Njombe</option>
+                <option value="Pemba North">Pemba North</option>
+                <option value="Pemba South">Pemba South</option>
+                <option value="Pwani">Pwani</option>
+                <option value="Rukwa">Rukwa</option>
+                <option value="Ruvuma">Ruvuma</option>
+                <option value="Shinyanga">Shinyanga</option>
+                <option value="Simiyu">Simiyu</option>
+                <option value="Singida">Singida</option>
+                <option value="Songwe">Songwe</option>
+                <option value="Tabora">Tabora</option>
+                <option value="Tanga">Tanga</option>
+                <option value="Zanzibar North">Zanzibar North</option>
+                <option value="Zanzibar South">Zanzibar South</option>
+                <option value="Zanzibar West">Zanzibar West</option>
+            </select>
+
+            <label for="role">Select Your Role:</label>
+            <select id="role" name="role" required>
+                <option value="">Select a role</option>
+                <option value="Driver">Driver</option>
+                <option value="Buyer">Buyer</option>
+                <option value="Seller">Seller</option>
+                <option value="Farmer">Farmer</option>
+            </select>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="confirm_password">Confirm Password:</label>
+            <input type="password" id="confirm_password" name="confirm_password" required>
+            <div class="error" id="passwordError"></div>
+
+            <button type="submit" class="btn">Register</button>
+        </form>
+    </div>
+
+    <script>
+        // Ensure NIDA No does not exceed 30 digits
+        document.getElementById("nida").addEventListener("input", function() {
+            if (this.value.length > 30) {
+                this.value = this.value.slice(0, 30);
+            }
+        });
+
+        // Password match validation
+        document.getElementById("registerForm").addEventListener("submit", function(event) {
+            let password = document.getElementById("password").value;
+            let confirmPassword = document.getElementById("confirm_password").value;
+            let passwordError = document.getElementById("passwordError");
+
+            if (password !== confirmPassword) {
+                event.preventDefault(); // Stop form submission
+                passwordError.textContent = "Passwords do not match!";
+            } else {
+                passwordError.textContent = ""; // Clear error if they match
+            }
+        });
+    </script>
+</body>
+</html>

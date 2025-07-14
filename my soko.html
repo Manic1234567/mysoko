@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOKONI ONE - Home</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            overflow-x: hidden;
+            background-image: url(sokop/bay.jpg);
+        }
+
+        /* Custom Font */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        /* Navigation Bar */
+        nav {
+            background-color: #28a745;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #ffc107;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/hero-bg.jpg') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            animation: slideIn 1.5s ease-in-out;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            animation: fadeIn 2.5s ease-in-out;
+        }
+
+        .hero .btn {
+            background-color: #ffc107;
+            color: #333;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 18px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            animation: fadeIn 3s ease-in-out;
+        }
+
+        .hero .btn:hover {
+            background-color: #e0a800;
+            transform: scale(1.1);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 20px;
+            text-align: center;
+            background-color: #fff;
+        }
+
+        .features h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .features .feature-cards {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .features .card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 30%;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        .features .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .features .card img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .features .card h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .features .card p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .features .card a {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .features .card a:hover {
+            background-color: #218838;
+        }
+
+        /* Login Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            animation: modalFadeIn 0.3s;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+
+        .login-form {
+            margin-top: 20px;
+        }
+
+        .login-form input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .login-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .login-form button:hover {
+            background-color: #218838;
+        }
+
+        .login-links {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .login-links a {
+            color: #28a745;
+            text-decoration: none;
+        }
+
+        .login-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Restricted Access Message */
+        .restricted-message {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .restricted-message h2 {
+            color: #dc3545;
+            margin-bottom: 20px;
+        }
+
+        .restricted-message p {
+            margin-bottom: 20px;
+        }
+
+        .restricted-message .btn {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .restricted-message .btn:hover {
+            background-color: #218838;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        footer a {
+            color: #ffc107;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #e0a800;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">MY SOKO</div>
+        <ul>
+            <li><a href="#" onclick="checkLogin('home.html')">My Soko</a></li>
+            <li><a href="login.php">Login</a></li>
+            <li><a href="#" onclick="checkLogin('market.php')">Market</a></li>
+            <li><a href="#" onclick="checkLogin('logistic.php')">Logistics</a></li>
+            <li><a href="learning.php">Learning</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div>
+            <h1>Welcome to MY SOKO</h1>
+            <p>Your one-stop solution for buying, selling, and managing crops.</p>
+            <a href="register.php"() class=btn>Get Started</a>
+        </div>
+    </section>
+
+   
+
+    <!-- Restricted Access Message -->
+    <div id="restrictedMessage" class="restricted-message">
+        <h2>Access Restricted</h2>
+        <p>You need to login or sign up to access this feature.</p>
+        <a href="login.php">Login</a>
+        <a href="register.php" class="btn">Sign Up</a>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 My soko. All rights reserved.</p>
+        <p>
+            <a href="#">Privacy Policy</a> | 
+            <a href="#">Terms of Service</a> | 
+            <a href="#">Contact Us</a>
+        </p>
+        <p>
+            Follow us: 
+            <a href="#">Facebook</a> | 
+            <a href="#">Twitter</a> | 
+            <a href="#">Instagram</a>
+        </p>
+    </footer>
+
+    <script>
+        // Check if user is logged in (in a real app, this would check session/cookies)
+        let isLoggedIn = false;
+
+        // Function to check login status before accessing features
+        function checkLogin(page) {
+            if (isLoggedIn) {
+                window.location.href = page;
+            } else {
+                document.getElementById('restrictedMessage').style.display = 'block';
+            }
+        }
+
+        // Function to show login modal
+        function showLoginModal() {
+            document.getElementById('loginModal').style.display = 'block';
+        }
+
+        // Function to close modal
+        function closeModal() {
+            document.getElementById('loginModal').style.display = 'none';
+            document.getElementById('restrictedMessage').style.display = 'none';
+        }
+
+        // Function to simulate user login
+        function loginUser() {
+            // In a real app, you would validate credentials here
+            isLoggedIn = true;
+            alert('Login successful! You can now access all features.');
+            closeModal();
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('loginModal')) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>  

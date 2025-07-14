@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Upload Portal</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+    
+    h1 {
+      text-align: center;
+      color: #3baadd;
+      margin-bottom: 30px;
+    }
+    
+    .upload-options {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 30px;
+    }
+    
+    .upload-option {
+      text-align: center;
+      padding: 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 45%;
+      background-color: #f0f8ff;
+      border: 2px dashed #3baadd;
+    }
+    
+    .upload-option:hover {
+      background-color: #e1f0fa;
+      transform: translateY(-5px);
+    }
+    
+    .upload-option i {
+      font-size: 40px;
+      margin-bottom: 10px;
+      color: #3baadd;
+    }
+    
+    .upload-form {
+      display: none;
+      margin-top: 20px;
+    }
+    
+    .form-container {
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    
+    .form-group {
+      margin-bottom: 15px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+    
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      box-sizing: border-box;
+    }
+    
+    .btn {
+      background-color: #3baadd;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+    
+    .btn:hover {
+      background-color: #2a8cc4;
+    }
+    
+    .btn-secondary {
+      background-color: #6c757d;
+    }
+    
+    .btn-secondary:hover {
+      background-color: #5a6268;
+    }
+    
+    .progress-bar {
+      width: 100%;
+      background-color: #e9ecef;
+      border-radius: 5px;
+      margin: 10px 0;
+      display: none;
+    }
+    
+    .progress {
+      height: 20px;
+      border-radius: 5px;
+      background-color: #3baadd;
+      width: 0%;
+      transition: width 0.3s;
+      text-align: center;
+      color: white;
+      font-size: 12px;
+      line-height: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Video Upload Portal</h1>
+    
+    <div class="upload-options">
+      <div class="upload-option" onclick="showUploadForm('youtube')">
+        <i class="fab fa-youtube"></i>
+        <h4>YouTube Link</h4>
+        <p>Share a link to your YouTube video</p>
+      </div>
+      
+      <div class="upload-option" onclick="showUploadForm('file')">
+        <i class="fas fa-upload"></i>
+        <h4>File Upload</h4>
+        <p>Upload your video file directly</p>
+      </div>
+    </div>
+    
+    <!-- YouTube Upload Form -->
+    <div id="youtube-form" class="upload-form">
+      <div class="form-container">
+        <h3>Share YouTube Video</h3>
+        <form id="youtube-upload-form">
+          <div class="form-group">
+            <label for="youtube-url">YouTube Video URL:</label>
+            <input type="url" id="youtube-url" placeholder="https://www.youtube.com/watch?v=..." required>
+          </div>
+          <div class="form-group">
+            <label for="video-title">Video Title:</label>
+            <input type="text" id="video-title" placeholder="Enter title" required>
+          </div>
+          <div class="form-group">
+            <label for="video-description">Description:</label>
+            <textarea id="video-description" rows="3" placeholder="Enter description"></textarea>
+          </div>
+          <button type="submit" class="btn">Submit Video</button>
+          <button type="button" class="btn btn-secondary" onclick="hideUploadForms()">Cancel</button>
+        </form>
+      </div>
+    </div>
+    
+    <!-- File Upload Form -->
+    <div id="file-upload-form" class="upload-form">
+      <div class="form-container">
+        <h3>Upload Video File</h3>
+        <form id="file-upload-form">
+          <div class="form-group">
+            <label for="video-file">Select Video File:</label>
+            <input type="file" id="video-file" accept="video/*" required>
+            <video width="320" height="240" controls>
+  <source src="video/7.mp4" type="video/mp4">
+  <source src="your-video.webm" type="video/webm">
+  Your browser does not support the video tag.
+</video>
+          </div>
+          <div class="form-group">
+            <label for="file-video-title">Video Title:</label>
+            <input type="text" id="file-video-title" placeholder="Enter title" required>
+          </div>
+          <div class="form-group">
+            <label for="file-video-description">Description:</label>
+            <textarea id="file-video-description" rows="3" placeholder="Enter description"></textarea>
+          </div>
+          <div class="progress-bar">
+            <div class="progress" id="upload-progress">0%</div>
+          </div>
+          <button type="submit" class="btn">Upload Video</button>
+          <button type="button" class="btn btn-secondary" onclick="hideUploadForms()">Cancel</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showUploadForm(type) {
+      document.querySelectorAll('.upload-form').forEach(form => {
+        form.style.display = 'none';
+      });
+      
+      if (type === 'youtube') {
+        document.getElementById('youtube-form').style.display = 'block';
+      } else if (type === 'file') {
+        document.getElementById('file-upload-form').style.display = 'block';
+      }
+    }
+    
+    function hideUploadForms() {
+      document.querySelectorAll('.upload-form').forEach(form => {
+        form.style.display = 'none';
+      });
+    }
+    
+    // Handle YouTube form submission
+    document.getElementById('youtube-upload-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const youtubeUrl = document.getElementById('youtube-url').value;
+      const title = document.getElementById('video-title').value;
+      const description = document.getElementById('video-description').value;
+      
+      // Extract YouTube video ID
+      const videoId = extractYouTubeId(youtubeUrl);
+      
+      if (videoId) {
+        // In a real application, you would send this data to your server
+        console.log('YouTube video submitted:', { videoId, title, description });
+        alert('Your YouTube video has been submitted successfully!');
+        this.reset();
+        hideUploadForms();
+      } else {
+        alert('Please enter a valid YouTube URL');
+      }
+    });
+    
+    // Handle file upload form submission
+    document.getElementById('file-upload-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const fileInput = document.getElementById('video-file');
+      const title = document.getElementById('file-video-title').value;
+      const description = document.getElementById('file-video-description').value;
+      
+      if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        const progressBar = document.querySelector('.progress-bar');
+        const progress = document.getElementById('upload-progress');
+        
+        // Show progress bar
+        progressBar.style.display = 'block';
+        
+        // Simulate upload progress (in a real app, you'd use XMLHttpRequest or Fetch API)
+        let percent = 0;
+        const interval = setInterval(() => {
+          percent += 10;
+          progress.style.width = percent + '%';
+          progress.textContent = percent + '%';
+          
+          if (percent >= 100) {
+            clearInterval(interval);
+            // In a real application, you would send the file to your server
+            console.log('Video file uploaded:', { file, title, description });
+            alert('Your video file has been uploaded successfully!');
+            this.reset();
+            hideUploadForms();
+            progressBar.style.display = 'none';
+            progress.style.width = '0%';
+          }
+        }, 300);
+      }
+    });
+    
+    function extractYouTubeId(url) {
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+      const match = url.match(regExp);
+      return (match && match[2].length === 11) ? match[2] : null;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<?php
+// db.php - Database Connection
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "online_market";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+?>
+
+<?php
+// register.php - User Registration
+include 'db.php';
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $role = $_POST['role'];
+    
+    $stmt = $conn->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $name, $email, $password, $role);
+    
+    if ($stmt->execute()) {
+        echo "<script>alert('Registration successful!'); window.location.href='login.php';</script>";
+    } else {
+        echo "Error: " . $conn->error;
+    }
+    $stmt->close();
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Register</h2>
+        <form method="POST">
+            <label>Name:</label>
+            <input type="text" name="name" required><br>
+            <label>Email:</label>
+            <input type="email" name="email" required><br>
+            <label>Password:</label>
+            <input type="password" name="password" required><br>
+            <label>Role:</label>
+            <select name="role">
+                <option value="farmer">Farmer</option>
+                <option value="buyer">Buyer</option>
+            </select><br>
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</body>
+</html>
+
+<?php
+// login.php - User Login
+include 'db.php';
+session_start();
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    
+    $stmt = $conn->prepare("SELECT id, password, role FROM users WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($id, $hashed_password, $role);
+    $stmt->fetch();
+    
+    if ($stmt->num_rows > 0 && password_verify($password, $hashed_password)) {
+        $_SESSION['user_id'] = $id;
+        $_SESSION['role'] = $role;
+        echo "<script>alert('Login successful!'); window.location.href='market.php';</script>";
+    } else {
+        echo "<script>alert('Invalid credentials!');</script>";
+    }
+    $stmt->close();
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <form method="POST">
+            <label>Email:</label>
+            <input type="email" name="email" required><br>
+            <label>Password:</label>
+            <input type="password" name="password" required><br>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>
+
+<?php
+// market.php - Crop Market
+include 'db.php';
+$result = $conn->query("SELECT * FROM crops");
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Market</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Crop Market</h2>
+        <table>
+            <tr><th>Crop</th><th>Price</th><th>Availability</th></tr>
+            <?php while ($row = $result->fetch_assoc()) { ?>
+                <tr>
+                    <td><img src="images/<?php echo $row['image']; ?>" width="50" height="50"> <?php echo $row['name']; ?></td>
+                    <td><?php echo $row['price']; ?></td>
+                    <td><?php echo $row['availability']; ?></td>
+                </tr>
+            <?php } ?>
+        </table>
+    </div>
+</body>
+</html>
+
+<?php
+// logistics.php - Logistics System
+include 'db.php';
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $crop_id = $_POST['crop_id'];
+    $destination = $_POST['destination'];
+    
+    $stmt = $conn->prepare("INSERT INTO logistics (crop_id, destination) VALUES (?, ?)");
+    $stmt->bind_param("is", $crop_id, $destination);
+    $stmt->execute();
+    $stmt->close();
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Logistics</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Logistics Request</h2>
+        <form method="POST">
+            <label>Crop ID:</label>
+            <input type="number" name="crop_id" required><br>
+            <label>Destination:</label>
+            <input type="text" name="destination" required><br>
+            <button type="submit">Request Logistics</button>
+        </form>
+    </div>
+</body>
+</html>
+
+<?php
+// learning.php - Learning Resources
+include 'db.php';
+$result = $conn->query("SELECT * FROM learning");
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Learning</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Learning Resources</h2>
+        <ul>
+            <?php while ($row = $result->fetch_assoc()) { ?>
+                <li><img src="images/<?php echo $row['image']; ?>" width="50" height="50"> <?php echo $row['title']; ?> - <?php echo $row['content']; ?></li>
+            <?php } ?>
+        </ul>
+    </div>
+</body>
+</html>

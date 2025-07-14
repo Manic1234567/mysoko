@@ -1,0 +1,31 @@
+
+<div class="container">
+    <div class="card">
+        <h2>Karibu Sokoni</h2>
+        <form id="productForm" enctype="multipart/form-data">
+            <div class="form-group">
+                <input type="text" class="form-control" name="name" placeholder="product name" required>
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" name="description" placeholder="Description (Features, condition, etc.)"></textarea>
+            </div>
+            <div class="form-group">
+                <input type="number" class="form-control" name="price" placeholder="Price (Tsh)" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <input type="number" class="form-control" name="quantity" placeholder="Quantity" required>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="location" placeholder="Location" required>
+            </div>
+              <div class="form-group">
+                <input type="number" class="form-control" name="contact" placeholder="contact" required>
+            </div>
+            <div class="form-group">
+                <label for="image" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Product Image</label>
+                <input type="file" class="form-control" name="image" id="image" accept="image/*" required>
+                <img id="imagePreview" class="image-preview" alt="Product Preview">
+            </div>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Post Product</button>
+        </form>
+    </div>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>sign up</title>
+	<style>
+		/* Body and Background Image */
+		body {
+			font-family: Tahoma, sans-serif;
+			background-color: black;
+			background-image: url(img/c.jpg);
+			background-size: cover;
+			background-position: center;
+			background-attachment: fixed;
+			color: white;
+			margin: 0;
+			padding: 0;
+			height: 100vh;
+		}
+
+		/* Header Bar */
+		#bar {
+			background-color: rgba(0, 0, 0, 0.7);
+			height: 100px;
+			padding: 20px;
+			color: white;
+			text-align: center;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			position: relative;
+		}
+
+		#bar div {
+			font-size: 40px;
+			font-weight: bold;
+			margin-left: 100px; /* Space for the logo */
+		}
+
+		/* Logo at Top-Left Corner */
+		#logo {
+			position: absolute;
+			top: -8px;
+			left: 10px;
+			width: 170px; /* Adjust size as needed */
+			height: auto;
+		}
+
+		/* Moving Welcome Text */
+		.welcome-text {
+			font-size: 17px;
+			text-align: center;
+			margin-top: 30px;
+			color: black;
+			text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.7);
+			white-space: nowrap;
+			overflow: hidden;
+			width: 100%;
+			display: inline-block;
+			position: relative;
+			animation: moveText 20s linear infinite;
+		}
+
+		@keyframes moveText {
+			0% {
+				transform: translateX(70%);
+			}
+			100% {
+				transform: translateX(-70%);
+			}
+		}
+
+		/* Form Styling */
+		.form-container {
+			background-color: rgba(102, 51, 153, 0.9); /* Semi-transparent rebeccapurple */
+			padding: 40px;
+			border-radius: 10px;
+			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+			width: 400px;
+			margin: 20px auto;
+			text-align: center;
+		}
+
+		.input-field {
+			width: 100%;
+			padding: 12px;
+			border-radius: 10px;
+			border: 1px solid #ccc;
+			margin-bottom: 15px;
+			font-size: 16px;
+			background-color: whitesmoke;
+			color: #333;
+		}
+
+		.signup-btn {
+			width: 100%;
+			padding: 12px;
+			background-color: lightskyblue;
+			font-size: 18px;
+			border-radius: 50px;
+			cursor: pointer;
+			border: none;
+			color: white;
+			transition: background-color 0.3s ease;
+		}
+
+		.signup-btn:hover {
+			background-color: deepskyblue;
+		}
+
+		/* Gender Radio Buttons */
+		.gender-label {
+			margin-right: 20px;
+			font-size: 16px;
+		}
+
+		.gender-options {
+			margin-bottom: 15px;
+		}
+
+		/* Responsive Design */
+		@media (max-width: 600px) {
+			.form-container {
+				width: 90%;
+				padding: 20px;
+			}
+
+			#bar div {
+				font-size: 30px;
+				margin-left: 80px; /* Adjust for smaller screens */
+			}
+
+			#logo {
+				width: 60px; /* Smaller logo for mobile */
+			}
+		}
+	</style>
+		
+</head>
+<body>
+
+	<div id="bar">
+		<div>HEART OF WORSHIP MINISTRY</div>
+		<img id="logo" src="img/he.png" alt="Logo">
+	</div>
+
+	<form action="heart worship.html" method="POST">
+		<div class="form-container">
+			<h1 class="welcome-text">Welcome to Heart of Worship to Praise JESUS</h1> <!-- Updated text -->
+
+			<label for="first-name">First Name:</label>
+			<input type="text" id="first-name" name="first-name" class="input-field" placeholder="Enter your first name" required>
+
+			<label for="middle-name">Middle Name:</label>
+			<input type="text" id="middle-name" name="middle-name" class="input-field" placeholder="Enter your middle name" required>
+
+			<label for="last-name">Last Name:</label>
+			<input type="text" id="last-name" name="last-name" class="input-field" placeholder="Enter your last name" required>
+
+			<label for="email">Email:</label>
+			<input type="email" id="email" name="email" class="input-field" placeholder="Enter your email" required>
+
+			<!-- Gender Radio Buttons (now placed before password) -->
+			<div>
+				<label class="gender-label">Gender:</label>
+				<input type="radio" id="male" name="gender" value="male" required> Male
+				<input type="radio" id="female" name="gender" value="female" required> Female
+			</div><br><br>
+
+			<label for="password">Password:</label>
+			<input type="password" id="password" name="password" class="input-field" placeholder="Enter your password" required>
+
+			<button type="submit" class="signup-btn"  a href="heart worship.html">Sign Up</button>
+
+		</div>
+	</form>
+
+</body>
+</html>

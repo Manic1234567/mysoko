@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HEART OF WORSHIP MINISTRY | Testimonies</title>
+
+  <style>
+
+ body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-image: url(img/he.png);
+      background-position: center;
+      margin-top: 0px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      color: #fff;
+      line-height: 1.6;
+    }
+    /* Previous CSS styles remain the same */
+
+    /* Testimonies Page Specific Styles */
+
+    .testimonies-page {
+      padding: 30px;
+    }
+
+    .video-upload-section {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+    }
+
+    .upload-options {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 20px;
+    }
+
+    .upload-option {
+      text-align: center;
+      padding: 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 45%;
+      background-color: rgba(80, 2, 89, 0.5);
+    }
+
+    .upload-option:hover {
+      background-color: rgba(80, 2, 89, 0.7);
+      transform: translateY(-5px);
+    }
+
+    .upload-option i {
+      font-size: 40px;
+      margin-bottom: 10px;
+      color: #3baadd;
+    }
+
+    .upload-form {
+      display: none;
+      margin-top: 20px;
+    }
+
+    .youtube-form, .file-upload-form {
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      background-color: rgba(255, 255, 255, 0.9);
+    }
+
+    .video-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .video-item {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .video-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      height: 0;
+      overflow: hidden;
+    }
+
+    .video-container iframe, 
+    .video-container video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .video-info {
+      padding: 15px;
+    }
+
+    .video-info h4 {
+      margin-bottom: 10px;
+      color: #3baadd;
+    }
+
+    /* Font Awesome for icons */
+    .fa {
+      display: inline-block;
+      font-style: normal;
+      font-variant: normal;
+      text-rendering: auto;
+      line-height: 1;
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+    }
+
+    .fa-youtube:before {
+      content: "\f167";
+    }
+
+}
+    .fa-upload:before {
+      content: "\f093";
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body >
+  <header>
+    <!-- Header content remains the same -->
+  </header>
+
+  <main>
+    <!-- Testimonies Page Content -->
+    <section id="testimonies-page" class="page-content">
+      <div class="testimonies-page">
+        <h2 data-lang="en">Share Your Testimony</h2>
+        <p data-lang="en">We believe in the power of testimonies. Share how God has worked in your life.</p>
+        
+        <div class="video-upload-section">
+          <h3 data-lang="en">Upload Testimony Video</h3>
+          <p data-lang="en">Choose how you want to share your testimony:</p>
+          
+          <div class="upload-options">
+            <div class="upload-option" onclick="showUploadForm('youtube')">
+              <i class="fab fa-youtube"></i>
+              <h4 data-lang="en">YouTube Video</h4>
+              <p data-lang="en">Share a link to your testimony on YouTube</p>
+            </div>
+            
+            <div class="upload-option" onclick="showUploadForm('file')">
+              <i class="fas fa-upload"></i>
+              <h4 data-lang="en">File Upload</h4>
+              <p data-lang="en">Upload your testimony video file</p>
+            </div>
+          </div>
+          
+          <!-- YouTube Upload Form -->
+          <div id="youtube-form" class="upload-form youtube-form">
+            <h4 data-lang="en">Share YouTube Testimony</h4>
+            <form id="youtube-upload-form">
+              <div class="form-group">
+                <label for="youtube-url" data-lang="en">YouTube Video URL:</label>
+                <input type="url" id="youtube-url" placeholder="https://www.youtube.com/watch?v=..." required>
+              </div>
+              <div class="form-group">
+                <label for="testimony-title" data-lang="en">Testimony Title:</label>
+                <input type="text" id="testimony-title" placeholder="Enter title" required>
+              </div>
+              <div class="form-group">
+                <label for="testimony-description" data-lang="en">Description:</label>
+                <textarea id="testimony-description" rows="3" placeholder="Share your story..."></textarea>
+              </div>
+              <button type="submit" class="btn" data-lang="en">Share Testimony</button>
+              <button type="button" class="btn" onclick="hideUploadForms()" data-lang="en">Cancel</button>
+            </form>
+          </div>
+          
+          <!-- File Upload Form -->
+          <div id="file-upload-form" class="upload-form file-upload-form">
+            <h4 data-lang="en">Upload Video Testimony</h4>
+            <form id="file-upload-form">
+              <div class="form-group">
+                <label for="video-file" data-lang="en">Select Video File:</label>
+                <input type="file" id="video-file" accept="video/*" required>
+              </div>
+              <div class="form-group">
+                <label for="file-testimony-title" data-lang="en">Testimony Title:</label>
+                <input type="text" id="file-testimony-title" placeholder="Enter title" required>
+              </div>
+              <div class="form-group">
+                <label for="file-testimony-description" data-lang="en">Description:</label>
+                <textarea id="file-testimony-description" rows="3" placeholder="Share your story..."></textarea>
+              </div>
+              <button type="submit" class="btn" data-lang="en">Upload Testimony</button>
+              <button type="button" class="btn" onclick="hideUploadForms()" data-lang="en">Cancel</button>
+            </form>
+          </div>
+        </div>
+        
+        <div class="video-gallery">
+          <h3 data-lang="en">Recent Testimonies</h3>
+          <!-- Sample testimonies will be added here by JavaScript -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <!-- Footer content remains the same -->
+  </footer>
+
+  <script>
+    // Previous JavaScript remains the same
+    
+    // Testimonies Page Functions
+    function showUploadForm(type) {
+      document.querySelectorAll('.upload-form').forEach(form => {
+        form.style.display = 'none';
+      });
+      
+      if (type === 'youtube') {
+        document.getElementById('youtube-form').style.display = 'block';
+      } else if (type === 'file') {
+        document.getElementById('file-upload-form').style.display = 'block';
+      }
+    }
+    
+    function hideUploadForms() {
+      document.querySelectorAll('.upload-form').forEach(form => {
+        form.style.display = 'none';
+      });
+    }
+    
+    // Handle form submissions
+    document.getElementById('youtube-upload-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const youtubeUrl = document.getElementById('youtube-url').value;
+      const title = document.getElementById('testimony-title').value;
+      const description = document.getElementById('testimony-description').value;
+      
+      // Extract YouTube video ID
+      const videoId = extractYouTubeId(youtubeUrl);
+      
+      if (videoId) {
+        addTestimonyVideo(videoId, title, description, 'youtube');
+        this.reset();
+        hideUploadForms();
+        alert('Your YouTube testimony has been shared!');
+      } else {
+        alert('Please enter a valid YouTube URL');
+      }
+    });
+    
+    document.getElementById('file-upload-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const fileInput = document.getElementById('video-file');
+      const title = document.getElementById('file-testimony-title').value;
+      const description = document.getElementById('file-testimony-description').value;
+      
+      if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        const videoUrl = URL.createObjectURL(file);
+        addTestimonyVideo(videoUrl, title, description, 'file');
+        this.reset();
+        hideUploadForms();
+        alert('Your video testimony has been uploaded!');
+      }
+    });
+    
+    function extractYouTubeId(url) {
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+      const match = url.match(regExp);
+      return (match && match[2].length === 11) ? match[2] : null;
+    }
+    
+    function addTestimonyVideo(videoId, title, description, type) {
+      const gallery = document.querySelector('.video-gallery');
+      const videoItem = document.createElement('div');
+      videoItem.className = 'video-item';
+      
+      videoItem.innerHTML = `
+        <div class="video-container">
+          ${type === 'youtube' ? 
+            `<iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>` : 
+            `<video controls><source src="${videoId}" type="video/mp4">Your browser does not support the video tag.</video>`}
+        </div>
+        <div class="video-info">
+          <h4>${title}</h4>
+          <p>${description}</p>
+          <small>${new Date().toLocaleDateString()}</small>
+        </div>
+      `;
+      
+      gallery.insertBefore(videoItem, gallery.firstChild);
+    }
+    
+    // Initialize with some sample testimonies
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add sample YouTube testimony
+      addTestimonyVideo('dQw4w9WgXcQ', 'God Changed My Life', 'I was lost but now I\'m found through the love of Christ', 'youtube');
+      
+      // You can add more sample testimonies here
+    });
+  </script>
+</body>
+</html>

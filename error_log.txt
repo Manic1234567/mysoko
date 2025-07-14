@@ -1,0 +1,5 @@
+2025-05-14 14:30:10 - location is required
+2025-05-14 14:30:45 - location is required
+2025-05-14 14:30:53 - location is required
+2025-05-14 14:58:43 - contact is required
+2025-05-14 14:58:55 - contact is required
